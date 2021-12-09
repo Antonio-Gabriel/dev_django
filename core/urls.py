@@ -19,5 +19,6 @@ from django_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/<name>/<int:age>', views.hello)
+    path('hello/<name>/<int:age>', views.hello),
+    path('sum/<int:first>/<int:last>', views.sum_values)
 ]
