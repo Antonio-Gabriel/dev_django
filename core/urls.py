@@ -28,7 +28,10 @@ urlpatterns = [
     path('user/', routes.user),
 
     path('evento/<str:titulo_evento>', views.evento),
+    
     path('criar', views.create_evento),
+    path('detelar/<int:id>', views.delete_evento),
+    # path('editar/<int:id>/', views.update_evento),
 
     path('login/', views.auth_user),
     path('login/auth', views.auth_user_request),
