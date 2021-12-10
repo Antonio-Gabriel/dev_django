@@ -5,7 +5,12 @@
 
 <ul>
   {% for data in evento %}
-  <li>{{data.titulo}} - {{ data.get_data_evento }}</li>
+  <li>
+    {{data.titulo}} - {{ data.get_data_evento }} (
+    <a href="?id={{data.id}}" style="color: blue">Edit</a>
+    /
+    <a href="detelar/{{data.id}}" style="color: red">Delete</a>)
+  </li>
   {% endfor %}
 </ul>
 
@@ -13,18 +18,32 @@
 <br />
 <form action="criar" method="post">
   {% csrf_token %}
+  <input type="hidden" name="id" value="{{current_evento.id}}">
   <label>titulo</label><br />
-  <input type="text" name="titulo" placeholder="titulo" /><br />
+  <input
+    type="text"
+    name="titulo"
+    placeholder="titulo"
+    value="{{current_evento.titulo}}"
+  /><br />
 
   <label>descricao</label><br />
-  <textarea name="descricao" cols="30" rows="10"></textarea><br />
+  <textarea name="descricao" cols="30" rows="10">
+  {{current_evento.descricao}}
+  </textarea>
+  <br />
 
   <label>data evento</label><br />
-  <input type="datetime-local" name="data_evento" /><br />
+  <input
+    type="datetime-local"
+    name="data_evento"
+    value="{{current_evento.get_data_input_event}}"
+  /><br />
 
   <button type="submit">Cadastrar</button>
   <br />
   <br />
 </form>
 
-{% endblock content %}
+{% for message in messages %}
+<strong>Success!</strong> {{ message }} {% endfor %} {% endblock content %}
