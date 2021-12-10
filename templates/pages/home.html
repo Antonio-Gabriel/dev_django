@@ -1,6 +1,8 @@
 {% extends '../index.html' %} {% block content %}
 <h2>Thid is the home page</h2>
 
+<a href="/logout">Logout</a>
+
 <ul>
   {% for data in evento %}
   <li>{{data.titulo}} - {{ data.get_data_evento }}</li>
