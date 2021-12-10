@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django_app import views
+from django.views.generic import RedirectView
 from django_app import routes
 
 urlpatterns = [
+    path('', views.index),
+    
     path('admin/', admin.site.urls),
     path('hello/<name>/<int:age>', views.hello),
     path('sum/<int:first>/<int:last>', views.sum_values),
