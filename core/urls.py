@@ -26,7 +26,9 @@ urlpatterns = [
     path('hello/<name>/<int:age>', views.hello),
     path('sum/<int:first>/<int:last>', views.sum_values),
     path('user/', routes.user),
+
     path('evento/<str:titulo_evento>', views.evento),
+    path('criar', views.create_evento),
 
     path('login/', views.auth_user),
     path('login/auth', views.auth_user_request),
