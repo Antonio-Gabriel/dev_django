@@ -1,19 +1,20 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django_app.models import Evento
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 # Create your views here.
 @login_required(login_url="/login/")
 def index(request):
-    evento = Evento.objects.all()
+    #evento = Evento.objects.all()
 
     # Filter with current user
-    # usuario = request.user
-    # evento_of_user = Evento.objects.filter(user=usuario)
+    usuario = request.user
+    evento_of_user = Evento.objects.filter(usuario=usuario)
 
     return render(request, 'pages/home.html', {
-        "evento": evento
+        "evento": evento_of_user
     })
 
 def hello(request, name, age):
@@ -42,7 +43,10 @@ def auth_user_request(request):
             login(request, is_valid_user)
             return redirect('/')
         else:
-            return redirect('/login/')    
-    else:
-        raise Exception("Method is not Post")
-        
+           messages.error(request, "Usuário ou senha inválidos")  
+    
+    return redirect('/login/')
+    
+def logout_user_request(request):
+    logout(request)
+    return redirect('/')
