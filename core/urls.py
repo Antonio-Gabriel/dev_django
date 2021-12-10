@@ -30,4 +30,6 @@ urlpatterns = [
 
     path('login/', views.auth_user),
     path('login/auth', views.auth_user_request),
+
+    path('logout/', views.logout_user_request),
 ]
