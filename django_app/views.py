@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from datetime import datetime, timedelta
+
 # Create your views here.
 @login_required(login_url="/login/")
 def index(request):
@@ -18,8 +20,9 @@ def index(request):
         current_evento["evento"] = Evento.objects.get(id=id_evento)        
         
     # Filter with current user
+    data_actual = datetime.now() - timedelta(hours=1)
     usuario = request.user
-    evento_of_user = Evento.objects.filter(usuario=usuario)
+    evento_of_user = Evento.objects.filter(usuario=usuario, data_evento__gt=data_actual)
 
     return render(request, 'pages/home.html', {
         "evento": evento_of_user,
