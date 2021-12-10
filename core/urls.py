@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django_app import views
+from django_app import routes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/<name>/<int:age>', views.hello),
-    path('sum/<int:first>/<int:last>', views.sum_values)
+    path('sum/<int:first>/<int:last>', views.sum_values),
+    path('user/', routes.user),
+    path('evento/<str:titulo_evento>', views.evento)
 ]
