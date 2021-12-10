@@ -13,11 +13,11 @@ class Evento(models.Model):
     class Meta:
         db_table = 'evento'
     
-    def __str__(self):
-        return self.titulo
-    
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%y %H:%M:%S')
     
     def get_data_input_event(self):
         return self.data_evento.strftime('%Y-%m-%dT%H:%M')
+    
+    def __str__(self):
+        return self.titulo
