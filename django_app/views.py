@@ -26,6 +26,24 @@ def sum_values(request, first: int, last: int) -> HttpResponse:
 def evento(request, titulo_evento: str) -> HttpResponse:
     return HttpResponse(f'<h1>{Evento.objects.get(titulo=titulo_evento.capitalize())}</h1>')
 
+def create_evento(request):
+    if request.POST:
+        titulo = request.POST.get('titulo')
+        descricao = request.POST.get('descricao')
+        data_evento = request.POST.get('data_evento')
+        usuario = request.user
+
+        if Evento.objects.create(
+                titulo=titulo, 
+                descricao=descricao, 
+                data_evento=data_evento, 
+                usuario=usuario):
+                            
+           messages.error(request, "Evento criado com sucesso")  
+
+    return redirect('/')
+            
+
 # def some_query(request, query: str):
 #     return redirect('/')
 
